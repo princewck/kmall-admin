@@ -1,0 +1,30 @@
+{
+  "name": "kmall-admin",
+  "authors": [
+    "chengkai.wang <trickle.wang@petkit.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/public",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "AdminLTE": "adminlte#^2.3.11",
+    "bootstrap": "^3.3.7",
+    "angular": "^1.6.1",
+    "angular-ui": "^0.4.0",
+    "jquery": "^3.1.1",
+    "requirejs": "^2.3.2",
+    "angular-ui-bootstrap": "^2.5.0",
+    "angular-require": "^1.3.0",
+    "angular-ui-router": "^0.4.2",
+    "angular-cookies": "^1.6.2"
+  }
+}
