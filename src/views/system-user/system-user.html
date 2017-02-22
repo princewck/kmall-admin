@@ -1,0 +1,99 @@
+<section class="content-header">
+    <h1>
+        系统用户管理
+        <small>管理系统用户</small>
+    </h1>
+    <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> 系统用户管理</a></li>
+    <li class="active">系统用户管理</li>
+    </ol>
+</section>
+<div class="content bg">
+    <div class="box box-widget">
+        <div class="box-header with-border">
+            <div class="pull-right"><button class="btn btn-flat btn-success" ng-click="addSysUser()">添加</button></div>
+        </div>
+        <div class="box-body">
+            <table st-table="sysUsers" class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>用户名</th>
+                    <th>昵称</th>
+                    <th>生日</th>
+                    <th>email</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody ng-hide="isLoading">
+                <tr ng-repeat="row in sysUsers">
+                    <td>{{row.username}}</td>
+                    <td>{{row.nick}}</td>
+                    <td>{{row.birthday | date : 'yyyy-MM-dd'}}</td>
+                    <td>{{row.mail}}</td>
+                    <td> <button class="btn btn-flat btn-default" ng-click="updateUser(row)">修改</button> <button class="btn btn-flat btn-warning">删除</button></td>
+                </tr>
+                </tbody>
+                <tbody ng-show="isLoading">
+                <tr>
+                    <td colspan="4" class="text-center">加载中 ... </td>
+                </tr>
+                </tbody>                
+            </table>           
+        </div>        
+    </div>
+</div>
+
+
+<script type="text/ng-template" id="system-user/edit.html">
+
+    <div class="modal-header">
+        <span class="pull-right" ng-click="$dismiss()">&times;</span>
+        <h3 class="modal-title" id="modal-title">用户编辑</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <form role="form" class="form-horizontal">
+            <div class="form-group">
+                <label class="col-xs-2 control-label">用户名</label>
+                <div class="col-xs-10">
+                    <input type="text" ng-model="user.username" class="form-control"/>
+                </div>
+            </div>
+        </form>
+        <form role="form" class="form-horizontal">
+            <div class="form-group">
+                <label class="col-xs-2 control-label">昵称</label>
+                <div class="col-xs-10">
+                    <input type="text" ng-model="user.nick" class="form-control"/>
+                </div>
+            </div>
+        </form>        
+        <form role="form" class="form-horizontal">
+            <div class="form-group">
+                <label class="col-xs-2 control-label">密码</label>
+                <div class="col-xs-10">
+                    <input type="password"  ng-model="user.password" class="form-control"/>
+                </div>
+            </div>
+        </form>
+        <form role="form" class="form-horizontal">
+            <div class="form-group">
+                <label class="col-xs-2 control-label">邮箱</label>
+                <div class="col-xs-10">
+                    <input type="text" ng-model="user.mail" class="form-control"/>
+                </div>
+            </div>
+        </form> 
+        <form role="form" class="form-horizontal">
+            <div class="form-group">
+                <label class="col-xs-2 control-label">生日</label>
+                <div class="col-xs-10">
+                    <input type="text" ng-model="user.birthday" class="form-control"/>
+                </div>
+            </div>
+        </form>                
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-warning" type="button" ng-click="$dismiss({status:'canceled'})">取消</button>
+        <button class="btn btn-primary" type="button" ng-click="submit()">确定</button>
+    </div>  
+</script>

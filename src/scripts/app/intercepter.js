@@ -1,5 +1,5 @@
 define(['app'], function(app) {
-    app.factory('myHttpInterceptor', ['$q','$cookies', function($q, $cookies, $uibModal) {
+    app.factory('myHttpInterceptor', ['$q','$cookies', '$rootScope',  function($q, $cookies, $uibModal, $rootScope) {
         return {
           'request': function(config) {
                   // TODO: 过滤所有url,如果是需要加小尾巴的加上小尾巴
@@ -13,7 +13,6 @@ define(['app'], function(app) {
                   } else {
                       token = '';
                }
-               console.table(token);
                config.headers["K-Session"] = token;
                config.cache = false;
 
@@ -36,6 +35,7 @@ define(['app'], function(app) {
             console.log(response);
             if (response.status == 401) {
                 alert('未登录，请重新登录！');
+                localStorage.setItem('login_user', '{}');
                 window.location.href = '/login.html';
             }
             return response;
