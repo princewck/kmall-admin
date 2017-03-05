@@ -1,0 +1,21 @@
+<!-- Sidebar Menu -->
+<ul class="sidebar-menu">
+<li class="header">Menu</li>
+<!-- Optionally, you can add icons to the links -->
+<li class="active"><a href="/"><i class="fa fa-university"></i> <span>首页</span></a></li>
+<li><a ui-sref="systemUser"><i class="fa fa-user"></i> <span>用户管理</span></a></li>
+<li class="treeview">
+    <a href="#"><i class="fa fa-product-hunt"></i> <span>商品管理</span>
+    <span class="pull-right-container">
+        <i class="fa fa-angle-left pull-right"></i>
+    </span>
+    </a>
+    <ul class="treeview-menu">
+    <li><a ui-sref="categories">分类管理</a></li>
+    <li><a ui-sref="brands">品牌管理</a></li>
+    <li><a ui-sref="products">商品管理</a></li>
+    <li><a href="#">商品导入</a></li>
+    </ul>
+</li>
+</ul>
+<!-- /.sidebar-menu -->

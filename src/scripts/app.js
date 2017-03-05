@@ -1,5 +1,5 @@
 define(['angular'], function(angular) {
-    return angular.module('kApp', ['ngRequire','ngCookies','ui.router', 'ui.bootstrap', 'smart-table'])
+    return angular.module('kApp', ['ngRequire','ngCookies','ui.router', 'ui.bootstrap', 'smart-table', 'plUploadModule'])
         .run(['$rootScope', '$http', function($rootScope, $http) {
             $rootScope.$on('$stateChangeSuccess', function() {
                 $rootScope.loginUser = localStorage.getItem('login_user') ? angular.fromJson(localStorage.getItem('login_user')) : {};

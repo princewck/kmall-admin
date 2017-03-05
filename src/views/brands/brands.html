@@ -1,0 +1,51 @@
+<section class="content-header">
+    <h1>
+        品牌管理
+        <small>商品品牌管理</small>
+    </h1>
+    <ol class="breadcrumb">
+    <li><a ui-sref="categories"><i class="fa fa-dashboard"></i> 商品品牌管理</a></li>
+    <li class="active">商品品牌管理</li>
+    </ol>
+</section>
+<div class="content bg">
+    <div class="box box-widget">
+        <div class="box-header with-border">
+            <button class="btn btn-success pull-right" ng-click="create()">创建</button>
+        </div>
+        <div class="box-body">
+            <table st-table="brands" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>名称</th>
+                            <th>图片</th>
+                            <th>描述信息</th>
+                            <th>状态</th>
+                            <th>排序</th>
+                            <td>操作</td>
+                        </tr>
+                    </thead>
+                    <tbody ng-hide="loading">
+                        <tr ng-repeat = "row in brands track by $index">
+                            <td> {{ row.id }} </td>
+                            <td> {{ row.name }} </td>
+                            <td> <img ng-src="{{ img }}" ng-repeat="img in row._images" height="40px"/> </td>
+                            <td> {{ row.description }} </td>
+                            <td ng-bind-html="getStatusText(row.status)"></td>
+                            <td> {{ row.sort }} </td>
+                            <td>
+                                <button class="btn btn-twitter btn-sm m5" ng-click="modify(row)">修改</button>
+                                <button class="btn btn-google btn-sm m5" ng-click="delete(row)">删除</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody ng-show="loading">
+                        <tr>
+                            <td colspan="4" class="text-center"> 加载中... </td>
+                        </tr>
+                    </tbody>                
+            </table> 
+        </div>
+    </div>
+</div>

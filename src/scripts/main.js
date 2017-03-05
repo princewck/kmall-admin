@@ -16,6 +16,8 @@
             "routers"               :   "./scripts/app/routers",
             "intercepters"          :   "./scripts/app/intercepter",
 
+            'uploader'              :   "./vendor/fileUploader/src/module.plupload",
+
             'img'                   :   "directives/img"
         },
         map: {
@@ -35,21 +37,26 @@
                     "css!https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"
                 ]
             },
-            // "angular-ui-bootstrap": {
-            //     deps: [
-            //         "//cdn.bootcss.com/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"
-            //     ]
-            // },
             "admin-lte": {
                 deps: [
                     "bootstrap",
                 ]
             },
             "app": {
-                deps: ["css!styles/common.css"]
+                deps: ["css!styles/common.css", "css!styles/base.css"]
             },
             "routers": {
                 deps: ["app"]
+            },
+            'uploader': {
+                deps: [
+                    './vendor/fileUploader/src/plupload/base64',
+                    './vendor/fileUploader/src/plupload/crypto',
+                    './vendor/fileUploader/src/plupload/hmac',
+                    './vendor/fileUploader/src/plupload/plupload.full.min',
+                    './vendor/fileUploader/src/plupload/sha1',
+                    './vendor/fileUploader/src/plupload/uuid'
+                ]
             }
         }
     });
@@ -59,7 +66,7 @@
     };
 
     requirejs(["angular"], function(angular) {
-        requirejs(["angular-require", "angular-cookies", "angular-ui-bootstrap", "angular-smart-table"], function() {
+        requirejs(["angular-require", "angular-cookies", "angular-ui-bootstrap", "angular-smart-table", "uploader"], function() {
             requirejs(["ui-router", "admin-lte", "routers", "intercepters", "app"], function() {
                 angular.bootstrap(document, ["kApp"]);
             });

@@ -21,7 +21,7 @@ define(['app'], function(app) {
         }
 
         vm.edit = function(user, isAdd) {
-            var url = isAdd ? '../api/admin/sysuser/add' : '../api/admin/sysuser/update';
+            var url = isAdd ? '../api/admin/sysuser' : ('../api/admin/sysuser/' + user.id);
             $uibModal.open({
                 template: $templateCache.get('system-user/edit.html'),
                 controller: function($scope) {
@@ -33,7 +33,7 @@ define(['app'], function(app) {
                                 getUsers();
                                 $scope.$close();
                             } else {
-                                alert('更新失败！');
+                                alert(res.data.message || '操作失败！');
                             }
                         });
 
