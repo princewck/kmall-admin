@@ -1,0 +1,138 @@
+<div class="modal-header">
+    <button type="button" class="close" aria-label="Close" ng-click="$dismiss()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title">编辑商品</h4>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label class="col-xs-2 control-label">图片</label>
+            <div class="col-xs-10">
+                <div pl-upload-common images="edit._images" progress="uploaderProgress"></div>
+            </div>
+        </div>        
+        <div class="form-group">
+            <label class="col-xs-2 control-label">名称</label>
+            <div class="col-xs-10">
+                <input type="text" class="form-control" ng-model="edit.product_name" placeholder="" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">所属分类</label>
+            <div class="col-xs-10">
+                <select ng-model="edit.category" class="form-control"ng-options="c.name for c in categories track by c.id"></select>
+            </div>
+        </div> 
+        <div class="form-group">
+            <label class="col-xs-2 control-label">所属品牌</label>
+            <div class="col-xs-10">
+                <select ng-model="edit.brand" class="form-control"ng-options="b.name for b in brands track by b.id"></select>
+            </div>
+        </div>                
+        <div class="form-group">
+            <label class="col-xs-2 control-label">状态</label>
+            <div class="col-xs-10">
+                <select name="" id="" class="form-control" ng-model="edit._status" ng-options="status.name for status in Enums.status track by status.status"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">商品id</label>
+            <div class="col-xs-10">
+                <input type="text" class="form-control" ng-model="edit.product_id" placeholder="" />
+            </div>
+        </div>        
+        <div class="form-group">
+            <label class="col-xs-2 control-label">商品详情页地址</label>
+            <div class="col-xs-10">
+                <input type="text" class="form-control" ng-model="edit.product_detail_page" placeholder="" />
+            </div>
+        </div>        
+        <div class="form-group">
+            <label class="col-xs-2 control-label">价格</label>
+            <div class="col-xs-10">
+                <input type="text" class="form-control" ng-model="edit.price" placeholder="" />
+            </div>
+        </div>        
+        <div class="form-group">
+            <label class="col-xs-2 control-label">分享短链接</label>
+            <div class="col-xs-10">
+                <input type="text" class="form-control" ng-model="edit.short_share_url" placeholder="" />
+            </div>
+        </div>        
+        <div class="form-group">
+            <label class="col-xs-2 control-label">分享链接</label>
+            <div class="col-xs-10">
+                <input type="text" class="form-control" ng-model="edit.share_url" placeholder="" />
+            </div>
+        </div>        
+        <div class="form-group">
+            <label class="col-xs-2 control-label">分享淘口令</label>
+            <div class="col-xs-10">
+                <input type="text" class="form-control" ng-model="edit.share_command" placeholder="" />
+            </div>
+        </div>        
+        <div class="form-group">
+            <label class="col-xs-2 control-label">总量</label>
+            <div class="col-xs-10">
+                <input type="text" class="form-control" ng-model="edit.total_amount" placeholder="" />
+            </div>
+        </div>        
+        <div class="form-group">
+            <label class="col-xs-2 control-label">剩余量</label>
+            <div class="col-xs-10">
+                <input type="text" class="form-control" ng-model="edit.left_amount" placeholder="" />
+            </div>
+        </div>        
+        <div class="form-group">
+            <label class="col-xs-2 control-label">红包描述</label>
+            <div class="col-xs-10">
+                <input type="text" class="form-control" ng-model="edit.coupon_text" placeholder="" />
+            </div>
+        </div>        
+        <div class="form-group">
+            <label class="col-xs-2 control-label">红包开始时间</label>
+            <div class="col-xs-10">
+                <input type="text" class="form-control" ng-model="edit.coupon_start" placeholder="" />
+            </div>
+        </div>        
+        <div class="form-group">
+            <label class="col-xs-2 control-label">红包结束时间</label>
+            <div class="col-xs-10">
+                <input type="text" class="form-control" ng-model="edit.coupon_end" placeholder="" />
+            </div>
+        </div>        
+        <div class="form-group">
+            <label class="col-xs-2 control-label">红包地址</label>
+            <div class="col-xs-10">
+                <input type="text" class="form-control" ng-model="edit.coupon_link" placeholder="" />
+            </div>
+        </div>        
+        <div class="form-group">
+            <label class="col-xs-2 control-label">红包口令</label>
+            <div class="col-xs-10">
+                <input type="text" class="form-control" ng-model="edit.coupon_command" placeholder="" />
+            </div>
+        </div>        
+        <div class="form-group">
+            <label class="col-xs-2 control-label">红包短链接</label>
+            <div class="col-xs-10">
+                <input type="text" class="form-control" ng-model="edit.coupon_short_url" placeholder="" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">描述</label>
+            <div class="col-xs-10">
+                <textarea name="" id="" cols="30" rows="3" class="form-control" ng-model="edit.description"></textarea>
+            </div>
+        </div>           
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default" type="button" ng-click="$dismiss()">
+        取消
+    </button>
+    <button class="btn btn-primary" type="button" ng-click="submit(this)">
+        确定
+    </button>
+</div>

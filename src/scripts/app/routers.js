@@ -35,7 +35,8 @@ define(['app'], function(app) {
             }
         })
         .state('products', {
-            url: '/admin/categories',
+            url: '/admin/products',
+            controller: 'productController',
             templateUrl: './views/products/products.html',
             resolve: {
                 deps: $requireProvider.requireJS(['./views/products/products'])
