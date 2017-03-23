@@ -14,26 +14,32 @@
             <button class="btn btn-success pull-right" ng-click="create()">创建</button>
         </div>
         <div class="box-body">
-            <table st-table="brands" class="table table-striped">
+            <table st-table="brands" class="table table-striped table-bordered">
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>名称</th>
-                            <th>图片</th>
+                            <th>logo图</th>
+                            <th>banner图</th>
+                            <th>小号banner图</th>
                             <th>描述信息</th>
                             <th>状态</th>
                             <th>排序</th>
-                            <td>操作</td>
+                            <th>所属分类</th>
+                            <th>操作</th>
                         </tr>
                     </thead>
                     <tbody ng-hide="loading">
                         <tr ng-repeat = "row in brands track by $index">
                             <td> {{ row.id }} </td>
                             <td> {{ row.name }} </td>
-                            <td> <img ng-src="{{ img }}" ng-repeat="img in row._images" height="40px"/> </td>
+                            <td> <img ng-src="{{ img }}" ng-repeat="img in row.logos" height="40px"/> </td>
+                            <td> <img ng-src="{{ img }}" ng-repeat="img in row.banners" height="40px"/> </td>
+                            <td> <img ng-src="{{ img }}" ng-repeat="img in row.smallBanners" height="40px"/> </td>
                             <td> {{ row.description }} </td>
                             <td ng-bind-html="getStatusText(row.status)"></td>
                             <td> {{ row.sort }} </td>
+                            <td> {{ row.categoryNames }} <i class="icofont icofont-edit pull-right" ng-click="editCategories(row)"></i></td>
                             <td>
                                 <button class="btn btn-twitter btn-sm m5" ng-click="modify(row)">修改</button>
                                 <button class="btn btn-google btn-sm m5" ng-click="delete(row)">删除</button>
@@ -42,7 +48,7 @@
                     </tbody>
                     <tbody ng-show="loading">
                         <tr>
-                            <td colspan="4" class="text-center"> 加载中... </td>
+                            <td colspan="8" class="text-center"> 加载中... </td>
                         </tr>
                     </tbody>                
             </table> 

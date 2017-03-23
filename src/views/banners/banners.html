@@ -1,0 +1,48 @@
+<section class="content-header">
+    <h1>
+        首页banner管理
+        <small>banner管理</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a ui-sref="banners"><i class="fa fa-dashboard"></i> 运营管理</a></li>
+        <li class="active">banner管理</li>
+    </ol>
+</section>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="content">
+            <div class="box box-widget">
+                <div class="box-header with-border">
+                    <button class="btn btn-success" ng-click="create()">创建</button>
+                </div>
+                <div class="box-body">
+                    <table st-table="banners" class="table table-bordered">
+                        <thead>
+                            <th>id</th>
+                            <th>图片</th>
+                            <th>标题</th>
+                            <th>子标题</th>
+                            <th>跳转链接</th>
+                            <th>底色</th>
+                            <th>操作</th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="banner in banners | orderBy : 'sort' track by $index">
+                                <td>{{ banner.id }}</td>
+                                <td><img ng-src="{{ banner.image }}" height="100px" /></td>
+                                <td>{{ banner.title }}</td>
+                                <td>{{ banner.subTitle }}</td>
+                                <td>{{ banner.link }}</td>
+                                <td>{{ banner.bg }}</td>
+                                <td>
+                                    <button type="button" class="btn btn-default btn-sm" ng-click="delete(banner)">删除</button>
+                                    <button type="button" class="btn btn-default btn-sm" ng-click="update(banner)">修改</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>                      
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -56,6 +56,35 @@ define(['app'], function(app) {
             });
         }
 
+        $scope.editCategoruGroup = function(row) {
+            $scope.row = angular.copy(row);
+            $uibModal.open({
+                templateUrl:'./views/categories/edit_category_group.html',
+                title:'编辑上级分类',
+                scope: $scope
+            });            
+        }
+
+        $scope.setCategoryGroups = function(scope) {
+            var params = {
+                categoryGroupIds: $scope.row.categoryGroups.map(function(c) {
+                    return c.id;
+                })
+            };
+            $http.post('../api/admin/category/'+ $scope.row.id + '/categorygroups', 
+                params, 
+                {headers: {
+                    'Content-Type': 'application/json'
+                }}).then(function(res) {
+                    if (res.data.code === 0) {
+                        loadCategories();
+                        scope.$close(null);
+                    } else {
+                        alert('操作失败:' + res.data.message || res.data.error.message || '');
+                    }
+                });            
+        }
+
         function doEdit(isNew, obj) {
             if (isNew) {
                 $scope.edit = {
@@ -78,13 +107,31 @@ define(['app'], function(app) {
             });
         }
 
+        $scope.default = {};
+        function loadCategoryGroups() {
+            $http.get('../api/admin/categoryGroups').then(function(res) {
+                if (res.data.code === 0) {
+                    $scope.default.categoryGroups = res.data.data;
+                } else {
+                    $scope.default.categoryGroups = [];
+                }
+            });
+        }
+        loadCategoryGroups();
+
         function loadCategories() {
             $scope.loading = true;
             $http.get('../api/admin/categories').then(function(res) {
                 if (res.data.code === 0) {
                     $timeout(function() {
                         $scope.loading = false;
-                        $scope.categories = res.data.data;                        
+                        var categoires = res.data.data;
+                        categoires.forEach(function(c) {
+                            c.categoryGroupNames = c.categoryGroups.map(function(g) {
+                                return g.name;
+                            }).join(' && ');
+                        });
+                        $scope.categories = categoires;                        
                     }, 0);
                 } else {
                     $scope.categories = [];

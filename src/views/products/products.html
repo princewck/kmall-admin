@@ -11,40 +11,76 @@
 <div class="content bg">
     <div class="box box-widget">
         <div class="box-header with-border">
+            <div class="col-xs-4">
+                <label for="" class="col-xs-4">类别</label>
+                <div class="col-xs-8">
+                    <select ng-model="category" ng-options="c.name for c in categories track by c.id" id="" class="form-control"></select>
+                </div>
+            </div>
             <button class="btn btn-success pull-right" ng-click="create()">创建</button>
         </div>
         <div class="box-body">
-            <table st-table="products" class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>名称</th>
-                            <th>图片</th>
-                            <th>描述信息</th>
-                            <th>状态</th>
-                            <th>排序</th>
-                            <td>操作</td>
-                        </tr>
-                    </thead>
-                    <tbody ng-hide="loading">
-                        <tr ng-repeat = "row in products track by $index">
-                            <td> {{ row.id }} </td>
-                            <td> {{ row.name }} </td>
-                            <td> <img ng-src="{{ img }}" ng-repeat="img in row._images" height="40px"/> </td>
-                            <td> {{ row.description }} </td>
-                            <td ng-bind-html="getStatusText(row.status)"></td>
-                            <td> {{ row.sort }} </td>
-                            <td>
-                                <button class="btn btn-twitter btn-sm m5" ng-click="modify(row)">修改</button>
-                                <button class="btn btn-google btn-sm m5" ng-click="delete(row)">删除</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tbody ng-show="loading">
-                        <tr>
-                            <td colspan="4" class="text-center"> 加载中... </td>
-                        </tr>
-                    </tbody>                
+            <table st-table="displayedProducts" st-safe-src="products" class="table table-striped product-table">
+                <thead>
+                    <tr>
+                        <th>名称</th>
+                        <th>商品图</th>
+                        <th>详情页</th>
+                        <th>价格</th>
+                        <th>月销量</th>
+                        <th>佣金比例</th>
+                        <th>佣金</th>
+                        <!--<th>淘宝客链接</th>-->
+                        <!--<th>淘宝客短链接</th>-->
+                        <th>淘口令</th>
+                        <th>红包总量</th>
+                        <th>红包剩余</th>
+                        <th>红包面值</th>
+                        <!--<th>红包领取链接</th>-->
+                        <!--<th>红包领取短链接</th>-->
+                        <th>描述信息</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody class="font12">
+                    <tr ng-repeat = "row in displayedProducts track by $index">
+                        <td> {{ row.product_name }} </td>
+                        <td> <img ng-src="{{ row.product_image }}" height="40px"/> </td>
+                        <td> <a ng-href="{{ row.product_detail_page }}" target="_blank">{{ row.product_detail_page }} </a></td>
+                        <td> {{ row.price }} </td>
+                        <td> {{ row.monthly_sold }} </td>
+                        <td> {{ row.benefit_ratio }} </td>
+                        <td> {{ row.benefit_amount }} </td>
+                        <!--<td> <a ng-href="{{ row.share_url }}" target="_blank"> 淘宝客链接</a> </td>-->
+                        <!--<td> <a ng-href="{{ row.short_share_url }}" target="_blank" > 淘宝客短链接</a> </td>-->
+                        <td> {{ row.share_command }} </td>
+                        <td> {{ row.coupon_total_amount }} </td>
+                        <td> {{ row.coupon_left_amount }} </td>
+                        <td> {{ row.coupon_text }} </td>
+                        <!--<td> <a ng-href="{{ row.coupon_link }}" target="_blank">优惠券</a> </td>-->
+                        <!--<td> <a ng-href="{{ row.coupon_short_url }}" target="_blank">优惠券短链接</a> </td>-->
+                        <td> {{ row.description }} </td>
+                        <td ng-bind-html="getStatusText(row.status)"></td>
+                        <td> {{ row.sort }} </td>
+                        <td class="nowrap">
+                            <button class="btn btn-twitter btn-sm m5" ng-click="modify(row)">修改</button>
+                            <button class="btn btn-google btn-sm m5" ng-click="delete(row)">删除</button>
+                        </td>
+                    </tr>                  
+                </tbody>                
+                <tbody ng-show="loading">
+                    <tr>
+                        <td colspan="14" class="text-center"> 加载中... </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="14" class="text-center">
+                            <div st-pagination="" st-items-by-page="10" st-displayed-pages="7"></div>
+                        </td>
+                    </tr>
+                </tfoot>                               
             </table> 
         </div>
     </div>

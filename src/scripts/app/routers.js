@@ -18,6 +18,14 @@ define(['app'], function(app) {
             }
         })
         //分类&商品&品牌
+        .state('category_groups', {
+            url: '/admin/categoryGroups',
+            templateUrl: './views/category_groups/category_groups.html',
+            controller:'categoryGroupController' ,
+            resolve: {
+                deps: $requireProvider.requireJS(['./views/category_groups/category_groups'])
+            }
+        })
         .state('categories', {
             url: '/admin/categories',
             templateUrl: './views/categories/categories.html',
@@ -42,8 +50,39 @@ define(['app'], function(app) {
                 deps: $requireProvider.requireJS(['./views/products/products'])
             }
         })
+        .state('productsImporting', {
+            url: '/admin/products/importing',
+            controller: 'productImportController',
+            templateUrl: './views/product-import/product-import.html',
+            resolve: {
+                deps: $requireProvider.requireJS(['./views/product-import/product-import'])
+            }
+        }) 
+        .state('productsImporting.detail', {
+            url: '/detail',
+            controller: 'productImportDetailController',
+            templateUrl: './views/product-import/product-import-detail.html',
+            resolve: {
+                deps: $requireProvider.requireJS(['./views/product-import/product-import'])
+            }
+        })
+        .state('banners', {
+            url: '/admin/banners',
+            controller: 'bannerController',
+            templateUrl: './views/banners/banners.html',
+            resolve: {
+                deps: $requireProvider.requireJS(['./views/banners/banners'])
+            }
+        })
+        .state('blockGroup', {
+            url: '/admin/blockGroup',
+            controller: 'blockGroupController',
+            templateUrl: './views/block-group/block-group.html',
+            resolve: {
+                deps: $requireProvider.requireJS(['./views/block-group/block-group'])
+            }
+        })                       
     }
 
     appRouteConfig.$inject = ['$stateProvider', '$urlRouterProvider', '$requireProvider'];
-
 });

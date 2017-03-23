@@ -12,7 +12,6 @@
             },
             success: function(data) {
                 if (data.code == 0) {
-                    alert('登录成功！');
                     Cookies.set('sessionToken', data.data.token);
                     localStorage.setItem('login_user', JSON.stringify(data.data));
                     window.location.href = '/#/'

@@ -3,7 +3,17 @@
 <li class="header">Menu</li>
 <!-- Optionally, you can add icons to the links -->
 <li class="active"><a href="/"><i class="fa fa-university"></i> <span>首页</span></a></li>
-<li><a ui-sref="systemUser"><i class="fa fa-user"></i> <span>用户管理</span></a></li>
+<li class="treeview">
+    <a href="#"><i class="fa fa-product-hunt"></i> <span>用户管理</span>
+    <span class="pull-right-container">
+        <i class="fa fa-angle-left pull-right"></i>
+    </span>
+    </a>
+    <ul class="treeview-menu">
+        <li><a ui-sref="systemUser">系统用户</a></li>
+        <li><a>终端用户</a></li>
+    </ul>
+</li>
 <li class="treeview">
     <a href="#"><i class="fa fa-product-hunt"></i> <span>商品管理</span>
     <span class="pull-right-container">
@@ -11,10 +21,24 @@
     </span>
     </a>
     <ul class="treeview-menu">
-    <li><a ui-sref="categories">分类管理</a></li>
-    <li><a ui-sref="brands">品牌管理</a></li>
-    <li><a ui-sref="products">商品管理</a></li>
-    <li><a href="#">商品导入</a></li>
+        <li><a ui-sref="category_groups">一级分类管理</a></li>
+        <li><a ui-sref="categories">二级分类管理</a></li>
+        <li><a ui-sref="brands">品牌管理</a></li>
+        <li><a ui-sref="products">商品管理</a></li>
+        <li><a ui-sref="productsImporting">商品导入</a></li>
+    </ul>
+</li>
+<li class="treeview">
+    <a href="#"><i class="fa fa-product-hunt"></i> <span>运营管理</span>
+    <span class="pull-right-container">
+        <i class="fa fa-angle-left pull-right"></i>
+    </span>
+    </a>
+    <ul class="treeview-menu">
+        <li><a ui-sref="banners">首页banner配置</a></li>
+        <li><a ui-sref="blockGroup">活动专区配置</a></li>
+        <li><a ui-sref="brands">友情链接设置</a></li>
+        <li><a ui-sref="products">广告位管理</a></li>
     </ul>
 </li>
 </ul>

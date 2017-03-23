@@ -1,0 +1,54 @@
+<section class="content-header">
+    <h1>
+        活动专区设置
+        <small>活动专区设置</small>
+    </h1>
+    <ol class="breadcrumb">
+    <li><a ui-sref="categories"><i class="fa fa-dashboard"></i> 活动专区设置</a></li>
+    <li class="active">活动专区设置</li>
+    </ol>
+</section>
+<div class="content">
+    <div class="box bgwhite">
+        <div class="box-header">
+            <button class="btn btn-success" ng-click="add()">添加</button>
+        </div>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>分组排序</th>
+                    <th>分组名</th>
+                    <th>图片</th>
+                    <th>标题</th>
+                    <th>描述</th>
+                    <th>链接</th>
+                    <th>条目排序</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody ng-repeat="item in items">
+                <tr>
+                    <td rowspan="{{ item.list.length }}"> {{ item.sort }} </td>
+                    <td rowspan="{{ item.list.length }}"> {{ item.name }} </td>
+                    <td> <img ng-src="{{ item.list[0]['image'] }}" height="30px" /> </td>
+                    <td> {{ item.list.length ? item.list[0]['link'] : '无' }} </td>
+                    <td> {{ item.list.length ? item.list[0]['title'] : '无' }}</td>
+                    <td> {{ item.list.length ? item.list[0]['description'] : '无' }}</td>
+                    <td> {{ item.list.length ? item.list[0]['sort'] : '无' }} </td>
+                    <td rowspan="{{ item.list.length }}"> 
+                        <button class="btn btn-default btn-sm" ng-click="update(item, $index)">修改</button> 
+                        <button class="btn btn-default btn-sm" ng-click="delete($index)">删除</button> 
+                    </td>
+                </tr>
+                <tr ng-repeat="item2 in item.list2">
+                    <td> <img ng-src="{{ item2['image'] }}" height="30px" /> </td>
+                    <td> {{ item2.link }} </td>
+                    <td> {{ item2.title }} </td>
+                    <td> {{ item2.description }} </td>
+                    <td> {{ item2.sort }} </td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </div>
+</div>

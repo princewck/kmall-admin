@@ -1,3 +1,7 @@
+html, body, .wrapper {
+  height: 100% !important;
+}
+
 .spinner {
   margin: 100px auto 0;
   width: 150px;
@@ -40,5 +44,54 @@
   } 40% { 
     transform: scale(1.0);
     -webkit-transform: scale(1.0);
+  }
+}
+
+#main-container {
+  position: relative;
+}
+
+.overlay.loading {
+  top: 0;
+  left: 0;
+  padding-top:100px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+  background: rgba(0, 0, 0, .5);
+  color: #fff;
+  align-items: flex-start;
+  overflow: hidden;
+  text-align: center;
+}
+
+.overlay.loading > span {
+  flex: auto;
+  font-size: 16px;
+}
+
+.spin {
+  position: absolute;
+  margin: 3px -20px;
+  animation: roll 2s linear infinite;
+  animation-fill-mode: both;
+}
+
+@keyframes roll {
+  from {
+    transform: rotateZ(0deg);
+  }
+  to {
+    transform: rotateZ(360deg);
+  }
+}
+
+@-webkit-keyframes roll {
+  from {
+    transform: rotateZ(0deg);
+  }
+  to {
+    transform: rotateZ(360deg);
   }
 }

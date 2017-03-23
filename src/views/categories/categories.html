@@ -22,6 +22,7 @@
                             <th>描述信息</th>
                             <th>状态</th>
                             <th>排序</th>
+                            <th>上级分类</th>
                             <td>操作</td>
                         </tr>
                     </thead>
@@ -32,7 +33,9 @@
                             <td> {{ row.description }} </td>
                             <td ng-bind-html="getStatusText(row.status)"></td>
                             <td> {{ row.sort }} </td>
+                            <td> {{ row.categoryGroupNames }} </td>
                             <td>
+                                <button class="btn btn-sm btn-dropbox" ng-click="editCategoruGroup(row)">上级分类</button>
                                 <button class="btn btn-twitter btn-sm m5" ng-click="modify(row)">修改</button>
                                 <button class="btn btn-google btn-sm m5" ng-click="delete(row)">删除</button>
                             </td>
@@ -40,7 +43,7 @@
                     </tbody>
                     <tbody ng-show="loading">
                         <tr>
-                            <td colspan="4" class="text-center"> 加载中... </td>
+                            <td colspan="7" class="text-center"> 加载中... </td>
                         </tr>
                     </tbody>                
             </table> 

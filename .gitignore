@@ -1,3 +1,4 @@
 .DS_Store
 src/bower_components/
 bower_compentents
+.vscode/

@@ -1,0 +1,63 @@
+<div class="modal-header">
+    <button type="button" class="close" aria-label="Close" ng-click="$dismiss()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title">编辑</h4>
+</div>
+<div class="modal-body">
+    <div pl-upload-common images="edit.images" progress="uploaderProgress"></div>
+    <div class="box box-success">
+        <div class="box-header with-border">
+            <form action="" class="form-horizontal">
+                <div class="form-group">
+                    <label for="" class="col-xs-3">分组名</label>
+                    <div class="col-xs-9">
+                        <input class="form-control" ng-model="edit.name" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3">排序</label>
+                    <div class="col-xs-9">
+                        <input class="form-control" ng-model="edit.sort" />
+                    </div>
+                </div>                
+            </form>
+        </div>
+        <div class="box-body">
+            <table class="table table-hover">
+                <tr>
+                    <thead>
+                        <th>图片</th>
+                        <th>排序</th>
+                        <th>标题</th>
+                        <th>描述</th>
+                        <th>链接</th>
+                        <th>操作</th>
+                    </thead>                    
+                </tr>
+                <tbody>
+                    <tr ng-repeat="item in edit.list">
+                        <td ng-bind-html="getImg($index, edit.images)"></td>
+                        <td><input type="text" ng-model="item.sort" /></td>
+                        <td><input type="text" ng-model="item.title" /> </td>
+                        <td><input type="text" ng-model="item.description" /> </td>
+                        <td><input type="text" ng-model="item.link" /></td>
+                        <td><button class="btn btn-google" ng-click="deleteItem(edit.list, $index)">删除</button></td>
+                    </tr>
+                    <tr>
+                        <td colspan="6"> <button class="btn btn-flat btn-block btn-default" ng-click="addItem(edit.list)">添加</button> </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default" type="button" ng-click="$dismiss()">
+        取消
+    </button>
+    <button class="btn btn-primary" type="button" ng-click="save(this)">
+        确定
+    </button>
+</div>

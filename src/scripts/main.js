@@ -12,13 +12,16 @@
             "angular-ui-bootstrap"  :   "http://cdn.bootcss.com/angular-ui-bootstrap/2.2.0/ui-bootstrap-tpls.min",
             "angular-require"       :   BOWER_DIR + "/angular-require/angular-require.min",
             "angular-smart-table"   :   BOWER_DIR + "/angular-smart-table/dist/smart-table.min",
+            'angular-sanitize'      :"http://cdn.bootcss.com/angular-sanitize/1.5.8/angular-sanitize.min",
+            'ui-select'             :["http://cdn.bootcss.com/angular-ui-select/0.19.4/select.min"],
             "app"                   :   "./scripts/app",
             "routers"               :   "./scripts/app/routers",
             "intercepters"          :   "./scripts/app/intercepter",
-
+            'pluploader'            :   './vendor/fileUploader/src/plupload/plupload.full.min',
             'uploader'              :   "./vendor/fileUploader/src/module.plupload",
 
-            'img'                   :   "directives/img"
+            'img'                   :   "directives/img",
+            'commonService'         :   './services/commonService'
         },
         map: {
           "*" : {
@@ -37,6 +40,9 @@
                     "css!https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"
                 ]
             },
+            "ui-select": {
+                deps: ["angular-sanitize","angular-ui-bootstrap","css!http://cdn.bootcss.com/angular-ui-select/0.19.4/select.min.css"]
+            },
             "admin-lte": {
                 deps: [
                     "bootstrap",
@@ -48,15 +54,17 @@
             "routers": {
                 deps: ["app"]
             },
-            'uploader': {
+            'pluploader': {
                 deps: [
                     './vendor/fileUploader/src/plupload/base64',
                     './vendor/fileUploader/src/plupload/crypto',
                     './vendor/fileUploader/src/plupload/hmac',
-                    './vendor/fileUploader/src/plupload/plupload.full.min',
                     './vendor/fileUploader/src/plupload/sha1',
                     './vendor/fileUploader/src/plupload/uuid'
                 ]
+            },
+            'uploader': {
+                deps: ['pluploader']
             }
         }
     });
@@ -66,9 +74,10 @@
     };
 
     requirejs(["angular"], function(angular) {
-        requirejs(["angular-require", "angular-cookies", "angular-ui-bootstrap", "angular-smart-table", "uploader"], function() {
-            requirejs(["ui-router", "admin-lte", "routers", "intercepters", "app"], function() {
+        requirejs(["angular-require", "angular-cookies", "angular-ui-bootstrap", "angular-smart-table", "uploader", 'ui-select'], function() {
+            requirejs(["ui-router", "admin-lte", "routers", "intercepters", "app", 'commonService'], function() {
                 angular.bootstrap(document, ["kApp"]);
+                requirejs(['css!vendor/icofont/css/icofont.css'])
             });
         });
     });

@@ -1,6 +1,11 @@
-define(['app'], function(app) {
-    app.controller('productController', ['$scope', '$http', '$timeout', '$sce', '$uibModal', function($scope, $http, $timeout, $sce, $uibModal) {
-        loadProducts();
+define(['app', 'commonService'], function(app) {
+    app.controller('productController', ['$scope', '$http', '$timeout', '$sce', '$uibModal', '$q', 'commonService', function($scope, $http, $timeout, $sce, $uibModal, $q, commonService) {
+        $scope.products = [];
+        $q.all([loadBrands(), loadCategories()]).then(function() {
+            $scope.category = $scope.categories[0];
+            loadProducts();
+        });
+
         $scope.getStatusText = function(status) {
             if (status) return $sce.trustAsHtml('<span class="text-success">可用</span>');
             return $sce.trustAsHtml('<span class="text-danger">禁用</span>');
@@ -26,7 +31,7 @@ define(['app'], function(app) {
                     }
                 })
             );
-        }        
+        }
 
         $scope.Enums = {
             status: [
@@ -55,6 +60,10 @@ define(['app'], function(app) {
             });
         }
 
+        $scope.$watch('category.id', function() {
+            loadProducts();
+        });
+
         $scope.uploaderProgress = 0;
 
         function doEdit(isNew, obj) {
@@ -80,30 +89,37 @@ define(['app'], function(app) {
         }
 
         function loadBrands() {
+            var defer = $q.defer();
             var brands = [{id: 0, name: '未指定'}];
-            $http.get('../api/admin/brands').success(function(res) {
-                if (res.code === 0) {
-                    brands = res.data;
-                    Array.prototype.push.apply(brands, res.data);                    
+            $http.get('../api/admin/brands').then(function(res) {
+                if (res.data.code === 0) {
+                    brands = res.data.data;
+                    Array.prototype.push.apply(brands, res.data.data);                    
                 }
                 $scope.brands = brands;
+                defer.resolve($scope.brands);
             });
+            return defer.promise;
         }
 
         function loadCategories() {
+            var defer = $q.defer();
             var categories = [{id: 0, name: '未指定'}];
-            $http.get('../api/admin/categories').success(function(res) {
-                if (res.code === 0) {
-                    categories = res.data;
-                    Array.prototype.push.apply(categories, res.data);                    
+            $http.get('../api/admin/categories').then(function(res) {
+                if (res.data.code === 0) {
+                    categories = res.data.data;
+                    Array.prototype.push.apply(categories, res.data.data);                    
                 }
                 $scope.categories = categories;
+                defer.resolve($scope.categories);
             });
+            return defer.promise;
         }        
 
         function loadProducts() {
+            var params = {cid: $scope.category};
             $scope.loading = true;
-            $http.get('../api/admin/products').then(function(res) {
+            $http.get('../api/admin/products', {showOverlay: true}).then(function(res) {
                 if (res.data.code === 0) {
                     $timeout(function() {
                         $scope.loading = false;
@@ -116,10 +132,11 @@ define(['app'], function(app) {
                                 b._images = [];
                             }
                         });
-                        $scope.products = products;
+                        $scope.products.splice(0, $scope.products.length-1);
+                        Array.prototype.push.apply($scope.products, products);
                     }, 0);
                 } else {
-                    $scope.products = [];
+                    $scope.products.splice(0, $scope.products.length-1);
                 }
             });
         }
