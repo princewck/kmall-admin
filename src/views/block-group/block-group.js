@@ -28,7 +28,9 @@ define(['app'], function(app) {
             $http.get('../api/admin/blockGroups').then(function(res) {
                 if (res.data.code === 0) {
                     if (angular.isArray(res.data.data)) {
-                       $scope.items = res.data.data.map(function(item) {
+                       $scope.items = res.data.data.filter(function(item) {
+                            return item;
+                       }).map(function(item) {
                             item.list = angular.isArray(item.list) ? item.list : [];
                             item.list2 = angular.copy(item.list);
                             item.list2.shift();
@@ -103,6 +105,7 @@ define(['app'], function(app) {
             }
             items = items.map(function(item) {
                 delete item.list2;
+                return item;
             });
             $http.post('../api/admin/blockGroups', {blockGroup: angular.toJson(items)}).then(function(res) {
                 if (res.data.code === 0) {

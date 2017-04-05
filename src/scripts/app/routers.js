@@ -82,6 +82,14 @@ define(['app'], function(app) {
                 deps: $requireProvider.requireJS(['./views/block-group/block-group'])
             }
         })                       
+        .state('navbars', {
+            url: '/admin/navbars',
+            controller: 'navbarController',
+            templateUrl: './views/navbars/navbars.html',
+            resolve: {
+                deps: $requireProvider.requireJS(['./views/navbars/navbars'])
+            }
+        })                       
     }
 
     appRouteConfig.$inject = ['$stateProvider', '$urlRouterProvider', '$requireProvider'];

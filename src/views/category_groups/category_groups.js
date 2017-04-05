@@ -32,9 +32,13 @@ define(['app'], function(app) {
 
         $scope.Enums = {
             status: [
-                        {status: true, name: '可用'},
-                        {status: false, name: '禁用'}
-                    ]            
+                {status: true, name: '可用'},
+                {status: false, name: '禁用'}
+                    ],
+            yesorno: [
+                {status: true, name: '是'},
+                {status: false, name: '否'}
+            ]          
         };
 
         $scope.submit = function(uibScope) {
@@ -43,7 +47,11 @@ define(['app'], function(app) {
                 name: $scope.edit.name,
                 description: $scope.edit.description,
                 sort: $scope.edit.sort,
-                status: $scope.edit._status.status
+                ceil_price: $scope.edit.ceil_price,
+                floor_price: $scope.edit.floor_price,
+                status: $scope.edit._status.status,
+                on_banner: $scope.edit._on_banner.status,
+                on_navbar: $scope.edit._on_navbar.status
             }
             var url = isNew ? '../api/admin/categoryGroup': ('../api/admin/categoryGroup/' + $scope.edit.id);
             $http.post(url, postData).then(function(res) {
@@ -69,6 +77,8 @@ define(['app'], function(app) {
                 $scope.edit = angular.copy(obj);
                 $scope.edit.id = obj.id;
                 $scope.edit._status = {status: obj.status};
+                $scope.edit._on_banner = {status: obj.on_banner};
+                $scope.edit._on_navbar = {status: obj.on_navbar};
             }
             $scope.edit.isNew = isNew;
             $uibModal.open({
