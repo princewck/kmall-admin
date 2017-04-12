@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>pluploader demo</title>
+</head>
+<body ng-controller="demoController">
+    <h1>{{ title }}</h1>
+    <h2>1. 手动上传例子</h2>
+    <div> {{ demo1.uprogress }} % </div>
+    <p>
+        <div lazy-load-img height="100px" url="{{ img }}" ng-repeat="img in demo1.imgs track by $index"></div>
+        <!--<img ng-repeat="img in demo1.imgs track by $index" ng-src="{{ img }}" width="150px" /></p>-->
+    <p>queue: <ul><li ng-repeat="item in demo1.queue"> name:{{item.name}} | size:{{ item.size }} | type:{{ item.size }} | percent:{{ item.percent }} </li></ul></p>
+    <div pl-upload 
+        fetch-url-fn="fetchUrlFn" 
+        progress="demo1.uprogress" 
+        images="demo1.imgs"
+        file-queue = 'demo1.queue'
+        auto-start = 'false'
+        multi='false'
+        manually-start-fn = "demo1.manuallyStart"
+        >
+        <!--自定义dom内容，内容为选择文件区域-->
+        <button >选择图片</button>
+    </div>
+    <!--不能在指令内，可以在任何位置-->
+    <button ng-click="demo1.manuallyStart()">手动上传</button>       
+
+    <h2>2. 自动上传例子</h2>
+    <div> {{ demo2.uprogress }} % </div>
+    <p>
+        <!--<img ng-repeat="img in demo2.imgs track by $index" ng-src="{{ img }}" width="150px" />-->
+        <div lazy-load-img height="100px" url="{{ img }}" ng-repeat="img in demo2.imgs track by $index"></div>
+    </p>
+    <p>queue: <ul><li ng-repeat="item in demo2.queue"> name:{{item.name}} | size:{{ item.size }} | type:{{ item.size }} | percent:{{ item.percent }} </li></ul></p>
+    <div pl-upload 
+         fetch-url-fn="fetchUrlFn" 
+         progress="demo2.uprogress" 
+         images="demo2.imgs"
+         file-queue = 'demo2.queue'
+         multi='false'
+         >
+        <button >选择图片</button>
+    </div> 
+
+    <h2>3. 多选图片</h2>
+    <div> {{ demo3.uprogress }} % </div>
+    <p>
+        <!--<img ng-repeat="img in demo3.imgs track by $index" ng-src="{{ img }}" width="150px" />-->
+        <div lazy-load-img url="{{ img }}" height="100px" ng-repeat="img in demo3.imgs track by $index"></div>
+    </p>
+    <p>queue: <ul><li ng-repeat="item in demo3.queue"> name:{{item.name}} | size:{{ item.size }} | type:{{ item.size }} | percent:{{ item.percent }} </li></ul></p>
+    <div pl-upload 
+         fetch-url-fn="fetchUrlFn" 
+         progress="demo3.uprogress" 
+         file-queue = 'demo3.queue'
+         images="demo3.imgs"
+         multi="true"
+         >
+        <button >选择图片</button>
+    </div>  
+
+    <h2>4. 默认模板</h2>
+    <div style="width:100%;height:500px;">
+        <div    pl-upload-common 
+                fetch-url-fn="fetchUrlFn" 
+                progress="demo4.uprogress" 
+                show-queue = 'true'
+                images="demo4.imgs"
+                multi="true"
+                auto-start = 'false'
+         ></div> 
+    </div>         
+<script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+<script src="plupload/plupload.full.min.js"></script>
+<script src="plupload/base64.js"></script>
+<script src="plupload/uuid.js"></script>
+<script src="plupload/crypto.js"></script>
+<script src="plupload/hmac.js"></script>
+<script src="plupload/sha1.js"></script>
+<script src="module.plupload.js"></script>
+<script src="demo.js"></script>
+</body>
+</html>

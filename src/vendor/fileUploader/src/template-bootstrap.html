@@ -1,0 +1,210 @@
+<style>
+    .pluploader-common-container div {
+        box-sizing: border-box;
+    }
+
+    .pluploader-common-container,
+    .pluploader-img-box,
+    .pluploader-footer {
+        width: 100%;
+        height:auto;
+        box-sizing: border-box;
+    }
+    .pluploader-common-container {
+        border: 1px solid #d5d5d5;
+        box-shadow: 1px 1px 1px #e5e5e5;
+    }
+
+    .pluploader-img-box {
+        position: relative;
+        float: left;
+        min-height: 120px;
+    }
+
+    .pluploader-img-list {
+        box-sizing: border-box;
+        display: block;
+        border: none;
+        width: 100%;
+        margin: 0;
+        padding: 10px 10px;
+    }
+    .pluploader-img-list li {
+        list-style: none;
+        display: inline-block;
+        padding: 3px;
+        border: 1px solid #f5f5f5;
+        margin:5px 5px;
+    }    
+    .pluploader-img-list li img {
+        height: 100px;
+        width: auto;
+    }    
+
+    .pluploader-img-queue {
+        font: 12px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        background: rgba(223,223,223,.8);
+        height: 100%;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        transition: width .5s .8s;
+    }
+
+    .pluploader-img-queue ul {
+        display: block;
+        padding:5px 10px;
+        width: 200%;
+        height: 200%;
+        transform: scale(.5);
+        transform-origin: 0 0;
+    }  
+
+    .pluploader-img-queue ul li {
+        border-bottom: 1px dotted #c5c5c5;
+        padding: 5px 0;
+    }
+
+    .pluploader-img-queue span.title {
+        display: block;
+        padding:0 5px;
+        width: 100%;
+        font-size: 12px;
+        line-height: 22px;
+        color:#c5c5c5;
+        position: absolute;
+        top:0;
+        left:0;
+    }       
+
+    .pluploader-footer {
+        border-top: 1px solid #d5d5d5;
+        overflow: auto;
+        position: relative;
+        padding: 0 15px;
+    }
+    .pluploader-footer-buttons {
+        height:100%;
+        width: 300px;
+        float:right;
+        padding: 15px;
+    }
+
+    .pluploader-footer-buttons>span,
+    .pluploader-footer-buttons>button {
+        float:right;
+    }
+
+    .pluploader-choose-pic,
+    .pluploader-manually-start {
+        width: 120px;
+        line-height:36px;
+        font-size:14px;
+        text-align: center;
+        display: block;
+        float: left;
+        margin-left: 10px;
+        outline:none;
+        border: 1px solid #f5f5f5;
+        background: #d5d5d5;
+        cursor: pointer;
+    }
+
+    .pluploader-manually-start {
+        background: #367fa9;
+        color:#fff;
+    }
+
+    .pluploader-choose-pic:hover,
+    .pluploader-manually-start:hover {
+        opacity: .8;
+    }
+
+    .pluploader-footer-progress {
+        width:100%;
+        height: 12px;
+    }
+
+    .pluploader-footer-progress-bar {
+        display: inline-block;
+        width: 100%;
+        border: 1px solid #f5f5f5;
+        height:12px;
+    }
+
+    .pluploader-footer-progress span {
+        display: block;
+        height: 100%;
+        transition: all .8s;
+        background: #00c400;
+    }
+
+    .pluploader-img-item-handler {
+        width:100%;
+    }
+
+    .pluploader-img-item-handler a {
+        line-height: 22px;
+        font-size: 12px;
+        color:#c5c5c5;
+        text-decoration: none;
+        margin-right:10px;
+        font-weight: bold;
+    }
+
+    .pluploader-img-item-handler a:hover {
+        text-decoration: underline;
+        color:#c40000;
+    }    
+</style>
+
+<div class="pluploader-common-container">
+    <div class="pluploader-img-box">
+        <ul class="pluploader-img-list">
+            <li ng-repeat="(k,img) in images">
+                <div lazy-load-img url="{{ img }}" height="100px"></div>
+                <div class="pluploader-img-item-handler">
+                    <a href="javascript:void(0)" ng-click="mv($index, -1)" ng-hide="$index < 1">← </a>
+                    <a href="javascript:void(0)" ng-click="mv($index, 1)" ng-hide="$index >= images.length-1">→ </a>
+                    <a href="javascript:void(0)" ng-click="delImg($index)">x</a>
+                </div>
+            </li>
+        </ul>
+        <div class="toggle-queue" ng-click="toggleQueue()"></div>
+        <div class="pluploader-img-queue" style="width:{{ getQueuePanelWidth() }}px">
+            <span class="title" ng-show="fileQueue.length">上传进度：</span>
+            <p style="color:darkcyan;font-size:16px;text-align: center;" ng-hide="fileQueue.length">全部上传完成！</p>
+            <ul>
+                <li ng-repeat="file in fileQueue track by $index">
+                    <a href="javascript:void(0);" style="color:orangered" ng-click="queeRm($index)">删</a>&nbsp;&nbsp;
+                    文件：{{ shortName(file.name) }}&nbsp;&nbsp;
+                    格式：{{ file.type }}&nbsp;&nbsp;
+                    进度：{{ file.percent }}%
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="pluploader-footer">
+        <div class="pluploader-footer-progress">
+            <div class="pluploader-footer-progress-bar">
+                <span style="width:{{ progress }}%"></span>
+            </div>
+        </div>
+        <div class="pluploader-footer-buttons">
+            <span pl-upload
+                  fetch-url-fn="fetchUrlFn"
+                  progress = 'progress'
+                  file-queue = 'fileQueue'
+                  images = 'images'
+                  multi = '{{ multi }}'
+                  auto-start = '{{ autoStart }}'
+                  manually-start-fn = 'manuallyStartFn'
+            >
+                <button class="btn btn-sm btn-default ml5">选择图片</button>
+            </span>
+            <button class="btn btn-sm btn-primary ml5" ng-if="autoStartBtn" ng-click="manuallyStartFn()">手动上传</button>
+        </div>
+    </div>
+</div>
