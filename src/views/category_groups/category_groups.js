@@ -98,6 +98,7 @@ define(['app'], function(app) {
                     }, 0);
                 } else {
                     $scope.categoryGroups = [];
+                    $scope.loading = false;
                 }
             });
         }
