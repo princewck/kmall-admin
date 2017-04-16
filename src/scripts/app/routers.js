@@ -51,13 +51,29 @@ define(['app'], function(app) {
             }
         })
         .state('productsImporting', {
-            url: '/admin/products/importing',
+            url: '/admin/products/importing/default',
             controller: 'productImportController',
             templateUrl: './views/product-import/product-import.html',
             resolve: {
                 deps: $requireProvider.requireJS(['./views/product-import/product-import'])
             }
         }) 
+        .state('productsImportingDaily', {
+            url: '/admin/products/importing/daily',
+            controller: 'dailyProductImportController',
+            templateUrl: './views/product-import/product-import.html',
+            resolve: {
+                deps: $requireProvider.requireJS(['./views/product-import/daily-import'])
+            }
+        })
+        .state('productsImportingHistory', {
+            url: '/admin/products/importing/history',
+            controller: 'uploadHistoryController',
+            templateUrl: './views/product-import/upload-history.html',
+            resolve: {
+                deps: $requireProvider.requireJS(['./views/product-import/upload-history'])
+            }
+        })         
         .state('productsImporting.detail', {
             url: '/detail',
             controller: 'productImportDetailController',

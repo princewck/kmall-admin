@@ -1,0 +1,50 @@
+<div class="row">
+    <section class="content-header">
+        <h1>
+            {{ title }}商品导入(xlsx)
+            <small>商品导入</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a ui-sref="categories"><i class="fa fa-dashboard"></i> 商品管理</a></li>
+            <li class="active">商品导入</li>
+        </ol>
+    </section>
+
+    <div class="col-xs-12">
+        <div class="box box-default">
+            <div class="box-header">
+                上传历史 <button class="btn btn-default btn-sm pull-right" ng-click="reload()">刷新</button>
+            </div>
+            <div class="box-body">
+                <table st-table="history" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>类型</th>
+                            <th>品牌id</th>
+                            <th>类别id</th>
+                            <th>开始时间</th>
+                            <th>结束时间</th>
+                            <th>记录总条数</th>
+                            <th>重复条数</th>
+                            <th>失败条数</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="row in history">
+                            <th>{{ row.id }}</th>
+                            <th>{{ row.type == 1 ? '选品': '每日精选' }}</th>
+                            <th>{{ row.brand_id }}</th>
+                            <th>{{ row.cid }}</th>
+                            <th>{{ row.start | date: 'yyyy-MM-dd HH:mm:ss' }}</th>
+                            <th>{{ row.end | date: 'yyyy-MM-dd HH:mm:ss' }}</th>
+                            <th>{{ row.count }}</th>
+                            <th>{{ row.duplicate_count }}</th>
+                            <th>{{ row.err_count }}</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -43,7 +43,8 @@ define(['app'], function(app) {
                 name: $scope.edit.name,
                 description: $scope.edit.description,
                 sort: $scope.edit.sort,
-                status: $scope.edit._status.status
+                status: $scope.edit._status.status,
+                keywords: $scope.edit.keywords
             }
             var url = isNew ? '../api/admin/category': ('../api/admin/category/' + $scope.edit.id);
             $http.post(url, postData).then(function(res) {

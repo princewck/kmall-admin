@@ -1,7 +1,7 @@
 define(['app', 'pluploader', 'commonService'], function(app) {
-    app.controller('productImportController', function($scope, $http, $cookies, $q, $state, $sce,  commonService) {
+    app.controller('dailyProductImportController', function($scope, $http, $cookies, $q, $state, $sce,  commonService) {
 
-        $scope.title = '选品库商品.';
+        $scope.title = '每日精选商品.';
 
         var getMultiParams = function() {
             var token = commonService.getCookie('sessionToken');
@@ -17,7 +17,7 @@ define(['app', 'pluploader', 'commonService'], function(app) {
         var token = commonService.getCookie('sessionToken');
         var uploader = new plupload.Uploader({
             browse_button: 'xlsxImporter',
-            url : '../api/import/products/xlsx/default',
+            url : '../api/import/products/xlsx/daily',
             multipart_params: {
                 'K-Session': token
             }
