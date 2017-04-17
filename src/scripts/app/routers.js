@@ -73,7 +73,15 @@ define(['app'], function(app) {
             resolve: {
                 deps: $requireProvider.requireJS(['./views/product-import/upload-history'])
             }
-        })         
+        }) 
+        .state('uploadCategoryGroup', {
+            url: '/admin/product/import/uploadCategory',
+            controller: 'uploadCategoryGroupController',
+            templateUrl: './views/product-import/upload-category.html',
+            resolve: {
+                deps: $requireProvider.requireJS(['./views/product-import/upload-category'])
+            }
+        })                 
         .state('productsImporting.detail', {
             url: '/detail',
             controller: 'productImportDetailController',
