@@ -30,6 +30,17 @@ define(['app'], function(app) {
             );
         }
 
+        $scope.getCategory = function(row) {
+            var categories = row.categories;
+            var defaultCategoryId = row.default_category;
+            var rt = null;
+            categories.some(function(c) {
+                if (c.id == defaultCategoryId)
+                    return rt = c.name,true;
+            });
+            return rt;
+        }
+
         $scope.Enums = {
             status: [
                 {status: true, name: '可用'},
@@ -51,7 +62,8 @@ define(['app'], function(app) {
                 floor_price: $scope.edit.floor_price,
                 status: $scope.edit._status.status,
                 on_banner: $scope.edit._on_banner.status,
-                on_navbar: $scope.edit._on_navbar.status
+                on_navbar: $scope.edit._on_navbar.status,
+                default_category: $scope.edit._default_category.id
             }
             var url = isNew ? '../api/admin/categoryGroup': ('../api/admin/categoryGroup/' + $scope.edit.id);
             $http.post(url, postData).then(function(res) {
@@ -71,7 +83,8 @@ define(['app'], function(app) {
                                 sort: 0,
                                 description:'',
                                 status: true,
-                                _status: {status: true}
+                                _status: {status: true},
+                                _default_category: {}
                             };
             } else {
                 $scope.edit = angular.copy(obj);
@@ -79,6 +92,7 @@ define(['app'], function(app) {
                 $scope.edit._status = {status: obj.status};
                 $scope.edit._on_banner = {status: obj.on_banner};
                 $scope.edit._on_navbar = {status: obj.on_navbar};
+                $scope.edit._default_category = {id: obj.default_category};
             }
             $scope.edit.isNew = isNew;
             $uibModal.open({

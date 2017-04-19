@@ -21,6 +21,7 @@
                             <th>名称</th>
                             <th>描述信息</th>
                             <th>价格范围</th>
+                            <th>默认下级分类</th>
                             <th>显示在banner</th>
                             <th>显示在导航栏</th>
                             <th>状态</th>
@@ -34,6 +35,7 @@
                             <td> {{ row.name }} </td>
                             <td> {{ row.description }} </td>
                             <td> {{ row.floor_price }} ~ {{ row.ceil_price }} </td>
+                            <td> {{ getCategory(row) }} </td>
                             <td> {{ row.on_banner ? '是' : '否' }} </td>
                             <td> {{ row.on_navbar ? '是' : '否' }} </td>
                             <td ng-bind-html="getStatusText(row.status)"></td>

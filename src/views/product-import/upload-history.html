@@ -21,6 +21,7 @@
                         <tr>
                             <th>id</th>
                             <th>类型</th>
+                            <th>状态</th>
                             <th>品牌id</th>
                             <th>类别id</th>
                             <th>开始时间</th>
@@ -34,6 +35,7 @@
                         <tr ng-repeat="row in history">
                             <th>{{ row.id }}</th>
                             <th>{{ row.type == 1 ? '选品': '每日精选' }}</th>
+                            <th> {{ row.status ? '已完成': '进行中。。' }} </th>
                             <th>{{ row.brand_id }}</th>
                             <th>{{ row.cid }}</th>
                             <th>{{ row.start | date: 'yyyy-MM-dd HH:mm:ss' }}</th>
