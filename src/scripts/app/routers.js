@@ -34,6 +34,14 @@ define(['app'], function(app) {
                 deps: $requireProvider.requireJS(['./views/categories/categories'])
             }
         })
+        .state('categories2', {
+            url: '/admin/:groupId/categories',
+            templateUrl: './views/categories/categories.html',
+            controller:'categoryController' ,
+            resolve: {
+                deps: $requireProvider.requireJS(['./views/categories/categories'])
+            }
+        })        
         .state('brands', {
             url: '/admin/brands',
             templateUrl: './views/brands/brands.html',

@@ -1,6 +1,5 @@
 define(['app'], function(app) {
-    app.controller('categoryController', ['$scope', '$http', '$timeout', '$sce', '$uibModal', function($scope, $http, $timeout, $sce, $uibModal) {
-        
+    app.controller('categoryController', ['$scope', '$http', '$timeout', '$sce', '$uibModal', '$stateParams', function($scope, $http, $timeout, $sce, $uibModal, $stateParams) {
         loadCategories();
 
         $scope.getStatusText = function(status) {
@@ -45,6 +44,9 @@ define(['app'], function(app) {
                 sort: $scope.edit.sort,
                 status: $scope.edit._status.status,
                 keywords: $scope.edit.keywords
+            }
+            if ($stateParams.groupId) {
+                postData.groupId = $stateParams.groupId;
             }
             var url = isNew ? '../api/admin/category': ('../api/admin/category/' + $scope.edit.id);
             $http.post(url, postData).then(function(res) {
@@ -132,7 +134,13 @@ define(['app'], function(app) {
                                 return g.name;
                             }).join(' && ');
                         });
-                        $scope.categories = categoires;                        
+                        $scope.categories = categoires.filter(function(category) {
+                            if ($stateParams.groupId) {
+                                return !!category.categoryGroups.some(function(g) {return g.id == $stateParams.groupId});
+                            } else {
+                                return true;
+                            }
+                        });                        
                     }, 0);
                 } else {
                     $scope.categories = [];

@@ -1,34 +1,38 @@
-<section class="content-header">
-    <h1>
-        商品一级分类映射表
-        <small>商品一级分类和导入表格中一级分类之间的映射关系</small>
-    </h1>
-    <ol class="breadcrumb">
-        <li><a ui-sref="uploadCategories"><i class="fa fa-dashboard"></i> 商品一级分类映射表</a></li>
-        <li class="active">商品一级分类映射表</li>
-    </ol>
-</section>
-<div class="col-xs-12">
-    <button class="btn btn-success" ng-click="new()">新增</button>
-    <table st-table="uploadCategories" class="table table-striped">
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>name</th>
-                <th>映射到分类</th>
-                <th>操作</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="category in uploadCategories">
-                <td> {{ category.id }} </td>
-                <td> {{ category.name }} </td>
-                <td> {{ category.group.name }} </td>
-                <td>
-                    <button class="btn btn-sm btn-danger" ng-click="update(category)">修改</button>  
-                    <button class="btn btn-sm btn-danger" ng-click="delete(category.id)">删除</button> 
-                </td>
-            </tr>
-        </tbody>        
-    </table>
+<div class="container-fluid">
+    <div class="row">
+        <section class="content-header">
+            <h1>
+                商品一级分类映射表
+                <small>商品一级分类和导入表格中一级分类之间的映射关系</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a ui-sref="uploadCategories"><i class="fa fa-dashboard"></i> 商品一级分类映射表</a></li>
+                <li class="active">商品一级分类映射表</li>
+            </ol>
+        </section>
+        <div class="col-xs-12">
+            <button class="btn btn-success" ng-click="new()">新增</button>
+            <table st-table="uploadCategories" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>name</th>
+                        <th>映射到分类</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="category in uploadCategories">
+                        <td> {{ category.id }} </td>
+                        <td> {{ category.name }} </td>
+                        <td> {{ category.group.name }} </td>
+                        <td>
+                            <button class="btn btn-sm btn-danger" ng-click="update(category)">修改</button>
+                            <button class="btn btn-sm btn-danger" ng-click="delete(category.id)">删除</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

@@ -32,7 +32,7 @@
                     <tbody ng-hide="loading">
                         <tr ng-repeat = "row in categoryGroups track by $index">
                             <td> {{ row.id }} </td>
-                            <td> {{ row.name }} </td>
+                            <td> <a ng-href="#!/admin/{{ row.id }}/categories"> {{ row.name }} </a> </td>
                             <td> {{ row.description }} </td>
                             <td> {{ row.floor_price }} ~ {{ row.ceil_price }} </td>
                             <td> {{ getCategory(row) }} </td>

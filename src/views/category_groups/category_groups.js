@@ -84,7 +84,11 @@ define(['app'], function(app) {
                                 description:'',
                                 status: true,
                                 _status: {status: true},
-                                _default_category: {}
+                                _default_category: {},
+                                _on_banner: {status: true},
+                                _on_navbar: {status: false},
+                                _default_category:{}
+
                             };
             } else {
                 $scope.edit = angular.copy(obj);
