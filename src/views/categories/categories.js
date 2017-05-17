@@ -43,7 +43,8 @@ define(['app'], function(app) {
                 description: $scope.edit.description,
                 sort: $scope.edit.sort,
                 status: $scope.edit._status.status,
-                keywords: $scope.edit.keywords
+                keywords: $scope.edit.keywords,
+                xpk_name: $scope.edit.xpk_name
             }
             if ($stateParams.groupId) {
                 postData.groupId = $stateParams.groupId;
@@ -57,6 +58,22 @@ define(['app'], function(app) {
                     window.alert('操作失败！');
                 }
             });
+        }
+
+        $scope.updateXpk = function(name, cid) {
+            if (!name) return alert('选品库名字不能为空');
+            //根据名字更新选品库
+            var url = `../api/admin/xpk/${name}/${cid}/update`;
+            $http.post(url).then(function(res) {
+                if (res.data.code == 0) {
+                    loadCategories();
+                    alert('更新成功！');
+                } else {
+                    console.log(res.data);
+                    alert('操作失败, 详情查看console');
+                }
+            });
+            
         }
 
         $scope.editCategoruGroup = function(row) {
@@ -95,6 +112,7 @@ define(['app'], function(app) {
                                 sort: 0,
                                 description:'',
                                 status: true,
+                                xpk_name:'',
                                 _status: {status: true}
                             };
             } else {

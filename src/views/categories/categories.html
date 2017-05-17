@@ -23,19 +23,24 @@
                             <th>状态</th>
                             <th>排序</th>
                             <th>上级分类</th>
+                            <th>关联选品库前缀</th>
+                            <th>选品库上次更新</th>
                             <td>操作</td>
                         </tr>
                     </thead>
                     <tbody ng-hide="loading">
-                        <tr ng-repeat = "row in categories track by $index">
+                        <tr ng-repeat = "row in categories track by row.id">
                             <td> {{ row.id }} </td>
                             <td> {{ row.name }} </td>
                             <td> {{ row.description }} </td>
                             <td ng-bind-html="getStatusText(row.status)"></td>
                             <td> {{ row.sort }} </td>
                             <td> {{ row.categoryGroupNames }} </td>
+                            <td> {{ row.xpk_name }} </td>
+                            <td> {{ row.xpk_last_update | date : 'yyyy-MM-dd HH:mm:ss' }} </td>
                             <td>
                                 <button class="btn btn-sm btn-dropbox" ng-click="editCategoruGroup(row)">上级分类</button>
+                                <button class="btn btn-twitter btn-sm m5" ng-click="updateXpk(row.xpk_name, row.id)">更新选品库</button>
                                 <button class="btn btn-twitter btn-sm m5" ng-click="modify(row)">修改</button>
                                 <button class="btn btn-google btn-sm m5" ng-click="delete(row)">删除</button>
                             </td>
