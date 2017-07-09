@@ -73,7 +73,7 @@ define(['app'], function(app) {
                     alert('更新成功！');
                 } else {
                     console.log(res.data);
-                    alert('操作失败, 详情查看console');
+                    alert('操作失败, 详情:' + res.data.message);
                 }
             });
             
