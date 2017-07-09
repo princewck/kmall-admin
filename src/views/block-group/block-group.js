@@ -13,7 +13,8 @@ define(['app'], function(app) {
                 sort: 0,
                 title: '',
                 description: '',
-                link: 'http://'
+                link: 'http://',
+                m_link: ''
             });
         }
 
@@ -48,6 +49,7 @@ define(['app'], function(app) {
             $scope.edit.isNew = false;
             $scope.edit.updateIndex = $index;
             $scope.edit.list = angular.isArray($scope.edit.list) ? $scope.edit.list: [];
+            $scope.edit.m_link = $scope.edit.m_link || '';
             //过滤掉没图片的
             $scope.edit.list = $scope.edit.list.filter(function(item) {
                 return item && item.image;
