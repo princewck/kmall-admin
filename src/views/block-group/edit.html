@@ -31,7 +31,8 @@
                         <th>排序</th>
                         <th>标题</th>
                         <th>描述</th>
-                        <th>链接</th>
+                        <th>pc链接</th>
+                        <th>mobile链接</th>
                         <th>操作</th>
                     </thead>                    
                 </tr>
@@ -42,6 +43,7 @@
                         <td><input type="text" ng-model="item.title" /> </td>
                         <td><input type="text" ng-model="item.description" /> </td>
                         <td><input type="text" ng-model="item.link" /></td>
+                        <td><input type="text" ng-model="item.m_link" /></td>
                         <td><button class="btn btn-google" ng-click="deleteItem(edit.list, $index)">删除</button></td>
                     </tr>
                     <tr>

@@ -22,8 +22,11 @@
                             <th>图片</th>
                             <th>标题</th>
                             <th>子标题</th>
-                            <th>跳转链接</th>
+                            <th>PC跳转链接</th>
+                            <th>手机跳转链接</th>
                             <th>底色</th>
+                            <th>pc端</th>
+                            <th>移动端</th>
                             <th>操作</th>
                         </thead>
                         <tbody>
@@ -33,7 +36,10 @@
                                 <td>{{ banner.title }}</td>
                                 <td>{{ banner.subTitle }}</td>
                                 <td>{{ banner.link }}</td>
+                                <td>{{ banner.m_link }}</td>
                                 <td>{{ banner.bg }}</td>
+                                <td>{{ banner.pc ? '显示': '不显示'}}</td>
+                                <td>{{ banner.mobile ? '显示': '不显示'}}</td>
                                 <td>
                                     <button type="button" class="btn btn-default btn-sm" ng-click="delete(banner)">删除</button>
                                     <button type="button" class="btn btn-default btn-sm" ng-click="update(banner)">修改</button>
