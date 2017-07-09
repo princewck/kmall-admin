@@ -23,6 +23,7 @@
                             <th>状态</th>
                             <th>排序</th>
                             <th>上级分类</th>
+                            <th>图片</th>
                             <th>关联选品库前缀</th>
                             <th>选品库上次更新</th>
                             <td>操作</td>
@@ -36,6 +37,7 @@
                             <td ng-bind-html="getStatusText(row.status)"></td>
                             <td> {{ row.sort }} </td>
                             <td> {{ row.categoryGroupNames }} </td>
+                            <td> <a ng-if="row.image" ng-href="{{ row.image }}" target="_blank"><img  ng-src="{{ row.image }}" height="42px" /></a> </td>
                             <td> {{ row.xpk_name }} </td>
                             <td> {{ row.xpk_last_update | date : 'yyyy-MM-dd HH:mm:ss' }} </td>
                             <td>

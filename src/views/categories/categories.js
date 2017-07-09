@@ -36,6 +36,8 @@ define(['app'], function(app) {
                     ]            
         };
 
+        $scope.uploaderProgress = 0;
+
         $scope.submit = function(uibScope) {
             var isNew = $scope.edit.isNew;//编辑还是新建
             var postData = {
@@ -46,6 +48,7 @@ define(['app'], function(app) {
                 keywords: $scope.edit.keywords,
                 xpk_name: $scope.edit.xpk_name
             }
+            $scope.edit.images && $scope.edit.images.length ? postData.image = $scope.edit.images[0] : '';
             if ($stateParams.groupId) {
                 postData.groupId = $stateParams.groupId;
             }
@@ -120,6 +123,7 @@ define(['app'], function(app) {
                 $scope.edit.id = obj.id;
                 $scope.edit._status = {status: obj.status};
             }
+            $scope.edit.images = $scope.edit.image ? [$scope.edit.image] : [];
             $scope.edit.isNew = isNew;
             $uibModal.open({
                 templateUrl:'./views/categories/edit.html',
