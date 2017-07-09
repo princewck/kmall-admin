@@ -23,12 +23,13 @@ define(['app'], function(app) {
         ];
 
         function getStatus(status) {
+            var _status = $scope.booleanEnum[1];
             $scope.booleanEnum.forEach(function (s) {
                 if (s.status === status) {
-                    return s;
+                    _status = s;
                 }
             });
-            return $scope.booleanEnum[1];
+            return _status;
         }
 
         $scope.update = function(_banner) {
