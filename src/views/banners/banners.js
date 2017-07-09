@@ -11,8 +11,32 @@ define(['app'], function(app) {
             setBanners(banners);
         }
 
-        $scope.update = function(banner) {
+        $scope.booleanEnum = [
+            {
+                text: '显示',
+                status: true
+            },
+            {
+                text: '不显示',
+                status: false
+            }            
+        ];
+
+        function getStatus(status) {
+            $scope.booleanEnum.forEach(function (s) {
+                if (s.status === status) {
+                    return s;
+                }
+            });
+            return $scope.booleanEnum[1];
+        }
+
+        $scope.update = function(_banner) {
+            var banner = angular.copy(_banner);
             banner.images = banner.image ? [banner.image]: [];
+            banner.m_link = banner.m_link || '';
+            banner.pc = getStatus(banner.pc);
+            banner.mobile = getStatus(banner.mobile);
             $scope.edit = banner;
             $uibModal.open({
                 templateUrl: './views/banners/edit.html',
@@ -25,12 +49,16 @@ define(['app'], function(app) {
             var check = function(banner) {
                     var banner2 = angular.copy(banner);
                     banner2.image = banner2.images.length ? banner2.images[0] : null;
+                    banner2.pc = banner2.pc.status;
+                    banner2.mobile = banner2.mobile.status;
                     delete banner2.images;
                     return banner2;                
             }
             var exist = false;
             var banners = $scope.banners.map(function(_banner) {
                 var b = angular.copy(_banner);
+                b.pc = getStatus(b.pc);
+                b.mobile = getStatus(b.mobile);
                 b.images = b.image ? [b.image] : [];
                 if (b.id === $scope.edit.id) {
                     exist = true;
@@ -60,7 +88,10 @@ define(['app'], function(app) {
                 title: '',
                 subTitle: '',
                 link: '',
-                bg: '#ffffff'
+                m_lnik: '',
+                bg: '#ffffff',
+                pc: $scope.booleanEnum[1],
+                mobile: $scope.booleanEnum[1]
             };
             $scope.edit = banner;
             $uibModal.open({
