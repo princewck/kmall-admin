@@ -22,8 +22,8 @@
                             <th>图片</th>
                             <th>标题</th>
                             <th>子标题</th>
-                            <th style="word-break:break-all">PC跳转链接</th>
-                            <th style="word-break:break-all">手机跳转链接</th>
+                            <th>PC跳转链接</th>
+                            <th>手机跳转链接</th>
                             <th>底色</th>
                             <th>pc端</th>
                             <th>移动端</th>
@@ -35,8 +35,8 @@
                                 <td><img ng-src="{{ banner.image }}" height="100px" /></td>
                                 <td>{{ banner.title }}</td>
                                 <td>{{ banner.subTitle }}</td>
-                                <td>{{ banner.link }}</td>
-                                <td>{{ banner.m_link }}</td>
+                                <td style="word-break:break-all">{{ banner.link }}</td>
+                                <td style="word-break:break-all">{{ banner.m_link }}</td>
                                 <td>{{ banner.bg }}</td>
                                 <td>{{ banner.pc ? '显示': '不显示'}}</td>
                                 <td>{{ banner.mobile ? '显示': '不显示'}}</td>
