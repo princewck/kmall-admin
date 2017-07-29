@@ -66,7 +66,7 @@ define(['app'], function(app) {
         $scope.updateXpk = function(name, cid) {
             if (!name) return alert('选品库名字不能为空');
             //根据名字更新选品库
-            var url = `../api/admin/xpk/${name}/${cid}/update`;
+            var url = '../api/admin/xpk/' + name + '/' + cid + '/update';
             $http.post(url).then(function(res) {
                 if (res.data.code == 0) {
                     loadCategories();

@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "ssh kmall_mobile ' cd /var/www/kmall-admin && git pull && echo deployed '"
   },
   "author": "",
   "license": "ISC"
