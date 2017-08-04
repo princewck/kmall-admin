@@ -100,7 +100,10 @@ define(['app'], function(app) {
                                 sort: 0,
                                 description:'',
                                 status: true,
-                                _status: {status: true}
+                                _status: {status: true},
+                                logos:[],
+                                banners: [],
+                                smallBanners: []
                             };
             } else {
                 $scope.edit = angular.copy(obj);
