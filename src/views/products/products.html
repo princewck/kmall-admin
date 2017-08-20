@@ -77,11 +77,12 @@
                 <tfoot>
                     <tr>
                         <td colspan="14" class="text-center">
-                            <div st-pagination="" st-items-by-page="10" st-displayed-pages="7"></div>
+                            <div st-pagination="" st-items-by-page="50" st-displayed-pages="7"></div>
                         </td>
                     </tr>
                 </tfoot>                               
-            </table> 
+            </table>
+            <k-pagination total="page.total" current="page.currentPage" pages="page.pages" click="loadProducts(page)"></k-pagination>
         </div>
     </div>
 </div>

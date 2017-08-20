@@ -1,0 +1,7 @@
+<div class="kmall-pagination" ng-show="pages > 1">
+  <ul>
+    <li ng-click="click({page: 1})">首页</li>
+    <li ng-repeat = "page in getPages() track by $index" ng-click="click({page: page})" ng-class="{active: page == current}">{{ page }}</li>
+    <li ng-click="click({page: pages})">末页</li>
+  </ul>
+</div>

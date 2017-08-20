@@ -3,7 +3,7 @@ define(['app', 'commonService'], function(app) {
         $scope.products = [];
         $q.all([loadBrands(), loadCategories()]).then(function() {
             $scope.category = $scope.categories[0];
-            loadProducts();
+            // loadProducts();
         });
 
         $scope.getStatusText = function(status) {
@@ -60,8 +60,8 @@ define(['app', 'commonService'], function(app) {
             });
         }
 
-        $scope.$watch('category.id', function() {
-            loadProducts();
+        $scope.$watch('category', function() {
+            loadProducts(1);
         });
 
         $scope.uploaderProgress = 0;
@@ -116,15 +116,28 @@ define(['app', 'commonService'], function(app) {
             return defer.promise;
         }        
 
-        function loadProducts() {
-            var params = {cid: $scope.category};
+        $scope.page = {
+            current: 1,
+            total: 0,
+            pages: 1
+        };
+
+        function loadProducts(p) {
+            var params = {};
+            if ($scope.category && $scope.category.id) {
+                params.cid = $scope.category.id;
+            }
             $scope.loading = true;
-            $http.get('../api/admin/products', {showOverlay: true}).then(function(res) {
+            page = p || 1;
+            $http.get('../api/admin/products/' + page, {showOverlay: true, params: params})
+                .then(function(res) {
                 if (res.data.code === 0) {
                     $timeout(function() {
                         $scope.loading = false;
                         var products = res.data.data;
-                        products.forEach(function(b) {
+                        console.log(products);
+                        $scope.page = products;
+                        products.data.forEach(function(b) {
                             try {
                                 b._images = angular.fromJson(b.image) || [];
                             } catch(e) {
@@ -133,7 +146,7 @@ define(['app', 'commonService'], function(app) {
                             }
                         });
                         $scope.products.splice(0, $scope.products.length-1);
-                        Array.prototype.push.apply($scope.products, products);
+                        Array.prototype.push.apply($scope.products, products.data);
                     }, 0);
                 } else {
                     $scope.products.splice(0, $scope.products.length-1);
@@ -141,5 +154,6 @@ define(['app', 'commonService'], function(app) {
             });
         }
 
+        $scope.loadProducts = loadProducts;
     }]);
 });

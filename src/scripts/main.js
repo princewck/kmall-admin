@@ -21,7 +21,8 @@
             'uploader'              :   "./vendor/fileUploader/src/module.plupload",
 
             'img'                   :   "directives/img",
-            'commonService'         :   './services/commonService'
+            'commonService'         :   './services/commonService',
+            'pagination'            :   'directives/pagination/pagination'
         },
         map: {
           "*" : {
@@ -75,7 +76,7 @@
 
     requirejs(["angular"], function(angular) {
         requirejs(["angular-require", "angular-cookies", "angular-ui-bootstrap", "angular-smart-table", "uploader", 'ui-select'], function() {
-            requirejs(["ui-router", "admin-lte", "routers", "intercepters", "app", 'commonService'], function() {
+            requirejs(["ui-router", "admin-lte", "routers", "intercepters", "app", 'commonService', 'pagination'], function() {
                 angular.bootstrap(document, ["kApp"]);
                 requirejs(['css!vendor/icofont/css/icofont.css'])
             });
