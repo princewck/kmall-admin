@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "ssh kmall_mobile ' cd /var/www/kmall-admin && git reset --hard && git checkout master && git pull && echo deployed '"
+    "deploy": "zip -r kmall-admin.zip ./src && scp ./kmall-admin.zip root@hk:/root/ && ssh hk 'unzip ./kmall-admin.zip && rm -rf ./kmall-admin && mv ./src ./kmall-admin && rm ./kmall-admin.zip' && rm ./kmall-admin.zip && echo 已发布"
   },
   "author": "",
   "license": "ISC"
